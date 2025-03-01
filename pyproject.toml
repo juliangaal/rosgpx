@@ -1,0 +1,23 @@
+[project]
+name = "rosgpx"
+version = "0.1.0"
+description = "A tiny ROS(2)-less tool for the conversion of ROS(2) NavSatFix messages to .gpx."
+readme = "README.md"
+authors = [
+    { name = "Julian Gaal", email = "" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "gpxpy",
+    "rosbags>=0.10.8",
+]
+
+[project.scripts]
+rosgpx = "rosgpx:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+gpxpy = { git = "https://github.com/tkrajina/gpxpy.git" }
