@@ -13,19 +13,21 @@ uv pip install git+https://github.com/juliangaal/rosgpx
 ## Run
 
 ```
-usage: rosgpx [-h] [--bag BAG] [--output OUTPUT] [--topic TOPIC] [--stuff | --no-stuff] [--force | --no-force]
-              [--frame-id FRAME_ID]
+usage: rosgpx [-h] --bag BAG [--output OUTPUT] --topic TOPIC [--min-valid-state MIN_VALID_STATE] [--stuff | --no-stuff]
+              [--force | --no-force] [--frame-id FRAME_ID]
 
 A tiny ROS(2)-less tool for the conversion of ROS(2) NavSatFix messages to .gpx
 
 options:
-  -h, --help           show this help message and exit
-  --bag BAG            Path to the input ROS 2 bag file (default: None)
-  --output OUTPUT      Path to the output GPX file (default: None)
-  --topic TOPIC        The topic name to filter (default: None)
-  --stuff, --no-stuff  Stuff the output GPX file into the rosbag directory (Only supported in ros2) (default: None)
-  --force, --no-force  Force overwriting existing output GPX file (default: None)
-  --frame-id FRAME_ID  Frame ID to filter by (default: None)
+  -h, --help            show this help message and exit
+  --bag BAG             Path to the input ROS 2 bag file (default: None)
+  --output OUTPUT       Path to the output GPX file (default: None)
+  --topic TOPIC         The topic name to filter (default: None)
+  --min-valid-state MIN_VALID_STATE
+                        The topic name to filter (default: 0)
+  --stuff, --no-stuff   Stuff the output GPX file into the rosbag directory (Only supported in ros2) (default: None)
+  --force, --no-force   Force overwriting existing output GPX file (default: None)
+  --frame-id FRAME_ID   Frame ID to filter by (default: None)
 ```
 
 with uv: `uv run rosgpx`

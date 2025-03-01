@@ -14,8 +14,9 @@ def main() -> None:
     )
 
     parser.add_argument("--bag", type=Path, help="Path to the input ROS 2 bag file", required=True)
-    parser.add_argument("--output", type=Path, help="Path to the output GPX file", required=True)
+    parser.add_argument("--output", type=Path, help="Path to the output GPX file")
     parser.add_argument("--topic", type=str, help="The topic name to filter", required=True)
+    parser.add_argument("--min-valid-state", type=int, help="The topic name to filter", default=0)
     parser.add_argument(
         "--stuff",
         action=argparse.BooleanOptionalAction,
@@ -37,8 +38,13 @@ def main() -> None:
     assert not args.output.exists() or args.force, (
         f"ERROR: {args.output} exists. Not overwriting, unless --force is passed"
     )
+    assert args.min_valid_state >= -1 and args.min_valid_state <= 2, (
+        "--min-valid-state must match NavSatStatus definition: -1 -> 2"
+    )
 
-    gpx = rosgpx.parse_navsatfix(args.bag, topic=args.topic, frame_id=args.frame_id)
+    gpx = rosgpx.parse_navsatfix(
+        args.bag, topic=args.topic, min_valid_state=args.min_valid_state, frame_id=args.frame_id
+    )
 
     rosgpx.write_gpx(gpx, args.output)
 
